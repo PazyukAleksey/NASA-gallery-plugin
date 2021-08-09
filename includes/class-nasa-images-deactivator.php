@@ -22,16 +22,17 @@
  */
 class Nasa_Images_Deactivator {
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function deactivate() {
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function deactivate() {
         $posts = get_posts( array(
             'post_type' => 'post-nasa-gallery',
+            'numberposts' => -1,
         ));
         foreach( $posts as $post ):
             wp_delete_attachment(get_post_thumbnail_id($post->ID), true);
@@ -39,6 +40,7 @@ class Nasa_Images_Deactivator {
         endforeach;
 
         unregister_post_type('post-nasa-gallery');
-	}
+        wp_clear_scheduled_hook('action_get_day_image');
+    }
 
 }
