@@ -82,13 +82,13 @@ class Nasa_Images {
         } else {
             $this->version = '1.0.0';
         }
-        date_default_timezone_set('America/New_York');
+        date_default_timezone_set('America/Chicago');
         $this->plugin_name = 'nasa-images';
         $this->apikey = '8npnsbJvgzSq1SlZj3nxGhxE3X5OjspLbaglkgL5';
         $this->apiurl = 'https://api.nasa.gov/planetary/apod';
         $this->start_date = $this->set_end_date();
         $this->send_request_url = $this->apiurl . '?api_key=' . $this->apikey . '&start_date=' . $this->start_date;
-        $this->tomorrow_date = date('Y-m-d', date_create('tomorrow')->getTimestamp());
+        $this->tomorrow_date = date('Y-m-d', date_create('+1 hour tomorrow')->getTimestamp());
         $this->today_date = date('Y-m-d', date_create('today')->getTimestamp());
         $this->nasa_api_day_url = $this->apiurl . '?api_key=' . $this->apikey . '&date=' . $this->today_date;
 
