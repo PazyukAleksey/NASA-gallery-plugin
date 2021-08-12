@@ -96,8 +96,6 @@ class Nasa_Images {
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
-        $this->nasa_api_data = $this->set_nasa_api_data($this->send_request_url);
-        $this->nasa_api_day_data = $this->set_nasa_api_data($this->nasa_api_day_url);
     }
 
     /**
@@ -241,13 +239,21 @@ class Nasa_Images {
         return $start_date;
     }
 
-    private function set_nasa_api_data($url) {
+    public function set_nasa_api_data() {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_URL,$this->send_request_url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
-        return json_decode($response);
+        $this->nasa_api_data = json_decode($response);
+    }
+    public function set_nasa_api_day_data() {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$this->nasa_api_day_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $this->nasa_api_day_data = json_decode($response);
     }
 
     /**

@@ -103,6 +103,7 @@ function get_day_image(){
     require_once(ABSPATH . "wp-admin" . '/includes/file.php');
     require_once(ABSPATH . "wp-admin" . '/includes/media.php');
     $nasa_image = new Nasa_Images();
+    $nasa_image->set_nasa_api_day_data();
     $post_data = $nasa_image->get_nasa_api_day_data();
     $post_arr = array(
         'post_status'       => 'publish',
